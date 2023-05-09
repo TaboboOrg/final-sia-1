@@ -39,6 +39,6 @@ public $timestamps = false;
 protected $table = 'courses';
 // column sa table
 protected $fillable = [
-'course_name', 'course_description'
+'course_id', 'course_name', 'course_description'
 ];
 }
