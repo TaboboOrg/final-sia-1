@@ -20,5 +20,5 @@ $router->get('/courses',['uses' => 'UserController@getUsers']);
 $router->post('/courses', 'UserController@add'); // create new user record
 $router->get('/courses/{course_id}', 'UserController@show'); // get user by id
 $router->put('/courses/update/{course_id}', 'UserController@update'); // update user record
-$router->patch('/courses/patch/{course_id}', 'UserController@update'); // update user record
+$router->patch('/courses/update/{course_id}', 'UserController@update'); // update user record
 $router->delete('/courses/delete/{course_id}', 'UserController@delete'); // delete record
