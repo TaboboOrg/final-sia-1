@@ -15,7 +15,8 @@ Class UserController extends Controller {
     }
     public function getUsers(){
         $users = User::all();
-        return response()->json($users, 200);
+        // return response()->json($users, 200);
+        return $this->successResponse($users);
     }
     // public function show($course_id)
     // {
