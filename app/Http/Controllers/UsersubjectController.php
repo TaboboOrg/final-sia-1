@@ -5,19 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Usersubject;
 
-Class UserController extends Controller {
+Class UsersubjectController extends Controller {
     use ApiResponser;
     private $request;
     public function __construct(Request $request){
         $this->request = $request;
     }
     public function getUsers(){
-        $users = User::all();
+        $usersubject = Usersubject::all();
         // return response()->json($users, 200);
-        return $this->successResponse($users);
+        return $this->successResponse($usersubject);
     }
     // public function show($course_id)
     // {
@@ -41,23 +40,20 @@ Class UserController extends Controller {
     public function add(Request $request){
         $rules = [
         'course_name' => 'required|max:100',
-        'course_description' => 'required|max:500',
-        'subject_id' => 'required|numeric|min:1|not_in:0'
+        'course_description' => 'required|max:500'
         ];
         $this->validate($request,$rules);
-        $usersubject = Usersubject::findOrFail($request->subject_id);
-
-        $user = User::create($request->all());
-        return $this->successResponse($user, Response::HTTP_CREATED);
+        $usersubject = User::create($request->all());
+        return $this->successResponse($usersubject, Response::HTTP_CREATED);
         }
         /**
         * Obtains and show one user
         * @return Illuminate\Http\Response
         */
-        public function show($course_id)
+        public function show($subject_id)
         {
-        $user = User::findOrFail($course_id);
-        return $this->successResponse($user);
+        $usersubject = Usersubject::findOrFail($subject_id);
+        return $this->successResponse($usersubject);
         // return User::where('course_id','like','%'.$course_id.'%')->get();
         // old code
         /*
@@ -79,12 +75,9 @@ Class UserController extends Controller {
         {
         $rules = [
             'course_name' => 'required|max:100',
-            'course_description' => 'required|max:500',
-            'subject_id' => 'required|numeric|min:1|not_in:0'
+            'course_description' => 'required|max:500'
         ];
         $this->validate($request, $rules);
-        $usersubject = Usersubject::findOrFail($request->subject_id);
-
         $user = User::findOrFail($course_id);
         $user->fill($request->all());
         

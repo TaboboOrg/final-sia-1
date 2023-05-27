@@ -33,12 +33,12 @@ namespace App\Models;
 // }
 
 use Illuminate\Database\Eloquent\Model;
-class User extends Model{
-protected $primaryKey = 'course_id';
+class Usersubject extends Model{
+protected $primaryKey = 'subject_id';
 public $timestamps = false;
-protected $table = 'courses';
+protected $table = 'subjects';
 // column sa table
 protected $fillable = [
-'course_id', 'course_name', 'course_description', 'subject_id'
+'subject_id', 'subject_name'
 ];
 }
