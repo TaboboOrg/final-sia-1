@@ -34,11 +34,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 class User extends Model{
-protected $primaryKey = 'course_id';
+protected $primaryKey = 'bookid';
 public $timestamps = false;
-protected $table = 'courses';
+protected $table = 'tblbooks';
 // column sa table
 protected $fillable = [
-'course_id', 'course_name', 'course_description', 'subject_id'
+'bookid', 'bookname', 'yearpublish', 'authorid'
 ];
 }

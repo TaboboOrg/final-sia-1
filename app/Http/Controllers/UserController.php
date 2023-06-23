@@ -40,12 +40,13 @@ Class UserController extends Controller {
     // }
     public function add(Request $request){
         $rules = [
-        'course_name' => 'required|max:100',
-        'course_description' => 'required|max:500',
-        'subject_id' => 'required|numeric|min:1|not_in:0'
+        'bookid' => 'required|min:1',
+        'bookname' => 'required|max:150',
+        'yearpublish' => 'required',
+        'authorid' => 'required|numeric|min:1'
         ];
         $this->validate($request,$rules);
-        $usersubject = Usersubject::findOrFail($request->subject_id);
+        $usersubject = Usersubject::findOrFail($request->authorid);
 
         $user = User::create($request->all());
         return $this->successResponse($user, Response::HTTP_CREATED);
@@ -54,9 +55,9 @@ Class UserController extends Controller {
         * Obtains and show one user
         * @return Illuminate\Http\Response
         */
-        public function show($course_id)
+        public function show($bookid)
         {
-        $user = User::findOrFail($course_id);
+        $user = User::findOrFail($bookid);
         return $this->successResponse($user);
         // return User::where('course_id','like','%'.$course_id.'%')->get();
         // old code
@@ -75,17 +76,17 @@ Class UserController extends Controller {
         * Update an existing author
         * @return Illuminate\Http\Response
         */
-        public function update(Request $request,$course_id)
+        public function update(Request $request,$bookid)
         {
         $rules = [
-            'course_name' => 'required|max:100',
-            'course_description' => 'required|max:500',
-            'subject_id' => 'required|numeric|min:1|not_in:0'
+            'bookname' => 'required|max:150',
+            'yearpublish' => 'required',
+            'authorid' => 'required|numeric|min:1'
         ];
         $this->validate($request, $rules);
-        $usersubject = Usersubject::findOrFail($request->subject_id);
+        $usersubject = Usersubject::findOrFail($request->authorid);
 
-        $user = User::findOrFail($course_id);
+        $user = User::findOrFail($bookid);
         $user->fill($request->all());
         
         // if no changes happen
@@ -120,9 +121,9 @@ Class UserController extends Controller {
         * Remove an existing user
         * @return Illuminate\Http\Response
         */
-        public function delete($course_id)
+        public function delete($bookid)
         {
-        $user = User::findOrFail($course_id);
+        $user = User::findOrFail($bookid);
         $user->delete();
         
         return $this->successResponse($user);

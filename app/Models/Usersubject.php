@@ -34,11 +34,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 class Usersubject extends Model{
-protected $primaryKey = 'subject_id';
+protected $primaryKey = 'authorid';
 public $timestamps = false;
-protected $table = 'subjects';
+protected $table = 'tblauthors';
 // column sa table
 protected $fillable = [
-'subject_id', 'subject_name'
+'authorid', 'fullname', 'gender', 'birthday'
 ];
 }

@@ -37,22 +37,25 @@ Class UsersubjectController extends Controller {
     //     $product->delete();
     //     return response()->json('Successfully Deleted');
     // }
+    
     public function add(Request $request){
         $rules = [
-        'course_name' => 'required|max:100',
-        'course_description' => 'required|max:500'
+        'authorid' => 'required|min:1',
+        'fullname' => 'required|max:500',
+        'gender' => 'required|in:Male,Female',
+        'birthday' => 'required|Date'
         ];
         $this->validate($request,$rules);
-        $usersubject = User::create($request->all());
+        $usersubject = Usersubject::create($request->all());
         return $this->successResponse($usersubject, Response::HTTP_CREATED);
         }
         /**
         * Obtains and show one user
         * @return Illuminate\Http\Response
         */
-        public function show($subject_id)
+        public function show($authorid)
         {
-        $usersubject = Usersubject::findOrFail($subject_id);
+        $usersubject = Usersubject::findOrFail($authorid);
         return $this->successResponse($usersubject);
         // return User::where('course_id','like','%'.$course_id.'%')->get();
         // old code
@@ -71,14 +74,15 @@ Class UsersubjectController extends Controller {
         * Update an existing author
         * @return Illuminate\Http\Response
         */
-        public function update(Request $request,$course_id)
+        public function update(Request $request,$authorid)
         {
         $rules = [
-            'course_name' => 'required|max:100',
-            'course_description' => 'required|max:500'
+        'fullname' => 'required|max:500',
+        'gender' => 'required|in:Male,Female',
+        'birthday' => 'required|Date'
         ];
         $this->validate($request, $rules);
-        $user = User::findOrFail($course_id);
+        $user = User::findOrFail($authorid);
         $user->fill($request->all());
         
         // if no changes happen
@@ -113,9 +117,9 @@ Class UsersubjectController extends Controller {
         * Remove an existing user
         * @return Illuminate\Http\Response
         */
-        public function delete($course_id)
+        public function delete($authorid)
         {
-        $user = User::findOrFail($course_id);
+        $user = Usersubject::findOrFail($authorid);
         $user->delete();
         
         return $this->successResponse($user);

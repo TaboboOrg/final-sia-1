@@ -16,14 +16,18 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/courses',['uses' => 'UserController@getUsers']);
-$router->post('/courses', 'UserController@add'); // create new user record
-$router->get('/courses/{course_id}', 'UserController@show'); // get user by id
-$router->put('/courses/update/{course_id}', 'UserController@update'); // update user record
-$router->patch('/courses/update/{course_id}', 'UserController@update'); // update user record
-$router->delete('/courses/delete/{course_id}', 'UserController@delete'); // delete record
+$router->get('/books',['uses' => 'UserController@getUsers']);
+$router->post('/books', 'UserController@add'); // create new user record
+$router->get('/books/{bookid}', 'UserController@show'); // get user by id
+$router->put('/books/{bookid}', 'UserController@update'); // update user record
+$router->patch('/books/{bookid}', 'UserController@update'); // update user record
+$router->delete('/books/{bookid}', 'UserController@delete'); // delete record
 
 //user subject
 
-$router->get('/usersubject','UsersubjectController@getUsers');
-$router->get('/usersubject/{id}','UsersubjectController@show'); // get user by id
+$router->get('/author','UsersubjectController@getUsers');
+$router->get('/author/{authorid}','UsersubjectController@show'); // get user by id
+$router->put('/author/{authorid}', 'UsersubjectController@update'); // update user record
+$router->patch('/author/{authorid}', 'UsersubjectController@update'); // update user record
+$router->delete('/author/{authorid}', 'UsersubjectController@delete'); // delete record
+$router->post('/author', 'UsersubjectController@add'); // create new user record
